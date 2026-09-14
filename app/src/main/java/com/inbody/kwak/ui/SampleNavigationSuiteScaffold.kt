@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.inbody.kwak.ui.Screen.BluLogScreen
 
 
 enum class AppDestinations(
@@ -56,15 +57,8 @@ fun SampleNavigationSuiteScaffoldParts(){
         navigationSuiteItems = {}
     ){
         when(currentDestination){
-            AppDestinations.SCANCONNECT -> ScanconnectDestination()
-            AppDestinations.LOGGING -> LoggingDestination()
+            AppDestinations.SCANCONNECT -> ScanConectDestination()
+            AppDestinations.LOGGING -> BluLogScreen()
         }
     }
 }
-
-@Composable
-fun ScanconnectDestination(){}
-@Composable
-fun LoggingDestination(){}
-
-
