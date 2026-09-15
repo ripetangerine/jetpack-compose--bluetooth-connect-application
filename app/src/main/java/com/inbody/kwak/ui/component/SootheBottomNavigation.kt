@@ -5,6 +5,8 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 //import androidx.compose.material.icons.R
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Bluetooth
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.filled.Spa
 import androidx.compose.material3.Text
@@ -20,7 +22,7 @@ public fun SootheBottomNavigation(modifier: Modifier = Modifier){
     ) { 
         NavigationBarItem(
             icon = {
-                Icon(imageVector=Icons.Default.Spa, contentDescription=null)       
+                Icon(imageVector=Icons.Default.Bluetooth, contentDescription=null)
             },
             label = {
                 Text("Home")
@@ -30,10 +32,10 @@ public fun SootheBottomNavigation(modifier: Modifier = Modifier){
         )
         NavigationBarItem(
             icon = {
-                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+                Icon(imageVector = Icons.Default.Settings, contentDescription = null)
             },
             label = {
-                Text("Hom2")
+                Text("Log")
             },
             selected=false,
             onClick={}
