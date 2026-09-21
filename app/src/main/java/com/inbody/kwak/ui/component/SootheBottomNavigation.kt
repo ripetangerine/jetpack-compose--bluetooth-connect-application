@@ -3,7 +3,6 @@ package com.inbody.kwak.ui.component
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-//import androidx.compose.material.icons.R
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.filled.Spa
