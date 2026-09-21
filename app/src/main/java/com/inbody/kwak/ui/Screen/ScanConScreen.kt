@@ -17,9 +17,9 @@ fun ScanConScreen(navController: NavController){
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ){
-        Text("first page")
+        Text("first page - blu and scan")
         Button(
-            onClick = {navController.navigate("second_screen")}
+            onClick = {navController.navigate("home")}
         ) {
             Text("두번째 이동")
         }

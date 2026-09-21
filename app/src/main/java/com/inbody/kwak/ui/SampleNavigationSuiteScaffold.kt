@@ -1,5 +1,7 @@
 package com.inbody.kwak.ui
 
+import android.R.attr.onClick
+import android.R.id.home
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BluetoothConnected
@@ -15,7 +17,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.inbody.kwak.ui.Screen.*
 
 
 enum class AppDestinations(
@@ -23,48 +32,46 @@ enum class AppDestinations(
     val icon: ImageVector,
     val contentDescription: String
     ) {
-    SCANCONNECT("Scan&Connect", Icons.Default.BluetoothConnected, "Scan&Connect"),
-    LOGGING("BLE Comm Log", Icons.Default.Settings, "BLE commnet Log")
+    HOME("Scan&Connect", Icons.Default.BluetoothConnected, "Scan&Connect"),
+    LOGGING("BLE Log", Icons.Default.Settings, "BLE commnet Log")
 
 }
-// 위의 함수 추적
-@Preview
+
 @Composable
-fun SampleNavigationSuiteScaffoldParts(){
-    var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.SCANCONNECT) }
+fun SampleNavigationSuiteScaffoldParts(modifier: Modifier = Modifier, navController: NavController){
+//    val navController = rememberNavController()
+//    val backStackEntry by navController.currentBackStackEntryAsState()
+//    val currentRoute = backStackEntry?.destination?.route
+
+    var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
 
     NavigationSuiteScaffold(
+        modifier = modifier,
         navigationSuiteItems = {
             AppDestinations.entries.forEach {
                 item(
                     icon = {
                         Icon(
-                            Icons.Default.Home, contentDescription = it.contentDescription
+                            it.icon, contentDescription = it.contentDescription
                         )
                     },
                     label = {Text(it.label)},
-                    selected = it == currentDestination,
-                    onClick = {currentDestination = it}
+                    selected = ( it == currentDestination ),
+                    onClick = { currentDestination = it }
                 )
             }
         }
     ){
-        // destination content
-    }
-
-    NavigationSuiteScaffold(
-        navigationSuiteItems = {}
-    ){
-        when(currentDestination){
-            AppDestinations.SCANCONNECT -> ScanconnectDestination()
-            AppDestinations.LOGGING -> LoggingDestination()
+//        NavHost(
+//            navController = navController,
+//            startDestination = "home"
+//        ){
+//            composable("home"){ ScanConScreen(navController) }
+//            composable("logging") { BluLogScreen(navController) }
+//        }
+        when (currentDestination) {
+            AppDestinations.HOME -> ScanConScreen(navController)
+            AppDestinations.LOGGING -> BluLogScreen(navController)
         }
     }
 }
-
-@Composable
-fun ScanconnectDestination(){}
-@Composable
-fun LoggingDestination(){}
-
-
