@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.inbody.kwak.ui.SampleNavigationSuiteScaffoldParts
 import com.inbody.kwak.ui.component.SootheBottomNavigation
-import com.inbody.kwak.ui.component.StatusBar
+import com.inbody.kwak.ui.component.CustomStatusBar
 import com.inbody.kwak.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize().statusBarsPadding()) { innerPadding ->
                     Column(modifier = Modifier.padding(innerPadding)) {
-                        StatusBar(modifier = Modifier.padding(innerPadding))
+                        CustomStatusBar(modifier = Modifier.padding(innerPadding))
                         SampleNavigationSuiteScaffoldParts(
 //                            modifier = Modifier.padding(innerPadding),
 //                            modifier = Modifier.weight(1f), // 남은 공간 전부
