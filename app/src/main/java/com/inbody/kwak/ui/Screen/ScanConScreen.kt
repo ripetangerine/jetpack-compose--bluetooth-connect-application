@@ -19,7 +19,7 @@ fun ScanConScreen(navController: NavController){
     ){
         Text("first page - blu and scan")
         Button(
-            onClick = {navController.navigate("home")}
+            onClick = {navController.navigate("logging")}
         ) {
             Text("두번째 이동")
         }
