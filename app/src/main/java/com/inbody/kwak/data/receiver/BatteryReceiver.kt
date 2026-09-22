@@ -1,4 +1,4 @@
-package com.inbody.kwak.receiver
+package com.inbody.kwak.data.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

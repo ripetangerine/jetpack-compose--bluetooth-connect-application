@@ -1,10 +1,7 @@
 package com.inbody.kwak.ui.component
 
-import android.R.attr.level
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.hardware.BatteryState
 import android.os.BatteryManager
 import android.os.PowerManager
 import androidx.compose.foundation.background
@@ -13,12 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Battery0Bar
-import androidx.compose.material.icons.filled.Battery1Bar
 import androidx.compose.material.icons.filled.Battery2Bar
-import androidx.compose.material.icons.filled.Battery3Bar
 import androidx.compose.material.icons.filled.Battery4Bar
-import androidx.compose.material.icons.filled.Battery5Bar
 import androidx.compose.material.icons.filled.Battery6Bar
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.BatteryChargingFull
@@ -29,8 +22,6 @@ import androidx.compose.material.icons.filled.NetworkWifi1Bar
 import androidx.compose.material.icons.filled.NetworkWifi2Bar
 import androidx.compose.material.icons.filled.NetworkWifi3Bar
 import androidx.compose.material.icons.filled.SignalWifi0Bar
-import androidx.compose.material.icons.filled.SignalWifi4Bar
-import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -43,26 +34,33 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.ContextCompat.getSystemService
-import com.inbody.kwak.receiver.BatteryReceiver
+import com.inbody.kwak.data.state.BatteryStateHolder
 import com.inbody.kwak.util.DateTimeDisplay
 import com.inbody.kwak.util.SystemBroadcastReceiver
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Preview
 @Composable
 fun CustomStatusBar(
-//    state: StatusBarState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
+
+    // flow 형태 리팩토링
+//    private val _batteryState = MutableStateFlow<BatteryState>();
+
+    // wifi
+    //
+
+    // 이전 상태 코드
     var batteryPct by remember { mutableIntStateOf(0) }        // 잔량 %
     var isCharging by remember { mutableStateOf(false) }       // 충전 중인지
     var isPowerSave by remember { mutableStateOf(false) }
-    val context = LocalContext.current
 
-    val wifiEnable = true // 나중에 값교체
+    val wifiEnable = true // TODO : 나중에 값교체
     val wifiConnected = true
     val wifiStrength = 3 // 0~4
 
@@ -80,6 +78,7 @@ fun CustomStatusBar(
         val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
         isPowerSave = powerManager.isPowerSaveMode
     }
+//    SystemBroadcastReceiver(systemAction = Intent.Connec) { }
 
     var batteryIcon =
         if(isCharging) {
@@ -109,13 +108,11 @@ fun CustomStatusBar(
             Color.Black
             }
 
-    var wifiIcon =
+    val wifiIcon =
         if(!wifiEnable){
             Icons.Default.WifiOff
         } else if(!wifiConnected){
             Icons.Default.SignalWifi0Bar
-        } else if(wifiStrength == 4){
-            Icons.Default.SignalWifi4Bar
         } else if(wifiStrength == 3){
             Icons.Default.NetworkWifi3Bar
         } else if(wifiStrength == 2){

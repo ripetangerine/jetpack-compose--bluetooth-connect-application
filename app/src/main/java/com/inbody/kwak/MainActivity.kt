@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize().statusBarsPadding()) { innerPadding ->
                     Column(modifier = Modifier.padding(innerPadding)) {
-                        CustomStatusBar(modifier = Modifier.padding(innerPadding))
+                        CustomStatusBar(modifier = Modifier)
                         SampleNavigationSuiteScaffoldParts(
 //                            modifier = Modifier.padding(innerPadding),
 //                            modifier = Modifier.weight(1f), // 남은 공간 전부

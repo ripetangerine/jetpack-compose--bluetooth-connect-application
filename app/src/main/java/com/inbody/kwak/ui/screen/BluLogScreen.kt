@@ -1,4 +1,4 @@
-package com.inbody.kwak.ui.Screen
+package com.inbody.kwak.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,17 +11,17 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
-fun ScanConScreen(navController: NavController){
+fun BluLogScreen(navController: NavController){
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-    ){
-        Text("first page - blu and scan")
+    ) {
+        Text("두 번째 화면")
         Button(
-            onClick = {navController.navigate("logging")}
+            onClick = { navController.popBackStack() }
         ) {
-            Text("두번째 이동")
+            Text("뒤로 가기")
         }
     }
 }
