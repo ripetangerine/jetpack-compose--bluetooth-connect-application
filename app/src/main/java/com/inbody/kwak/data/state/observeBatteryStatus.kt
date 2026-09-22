@@ -30,11 +30,12 @@ fun parseBattery(intent: Intent?): Battery?{ // 근데 여기서 왜 intent 를 
     } else {
       0
     }
+  // label : powerManager 분리 혹은 위의 관련 intent 오류 고치기...아 powerManager 빼야할듯 여기서
 
   val status = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
   val isCharging =
     status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
-  val isPowerSave = PowerManager.isPowerSaveMode
+  val isPowerSave = powerManager.isPowerSaveMode
 }
 
 @Composable
